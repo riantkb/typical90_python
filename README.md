@@ -7,11 +7,11 @@
 - [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_a)
 - [Tweet Link](https://twitter.com/e869120/status/1376665578513989633)
 
-| Submit Language | Source Code | Submission | Exec Time |
-| :--- | :---: | :---: | ---: |
-| Python (3.8.2) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933908) | 214 ms |
-| PyPy3 (7.3.0) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933929) | 100 ms |
-| Cython (0.29.16) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933948) | 159 ms |
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933908) | AC | 214 ms |
+| PyPy3 (7.3.0) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933929) | AC | 100 ms |
+| Cython (0.29.16) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933948) | AC | 159 ms |
 
 ### Memo
 - 特になし
