@@ -2,6 +2,8 @@
 
 このリポジトリは、riantkb の Python 練習も兼ねた [競プロ典型 90 問](https://atcoder.jp/contests/typical90) の提出コードをまとめたものです。
 
+
+
 ## A: 001 - Yokan Party（★4）
 
 - [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_a)
@@ -13,9 +15,39 @@
 | PyPy3 (7.3.0) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933929) | AC | 100 ms |
 | Cython (0.29.16) | [a.py](src/a.py) | [link](https://atcoder.jp/contests/typical90/submissions/21933948) | AC | 159 ms |
 
+
 ### Memo
 - 特になし
 - 1 問目なので無駄に PyPy と Cython でも同じコードを提出してみた。
   - PyPy はやはり雑に速くなる。
   - Cython も、この使い方だと本来の力の 3 割くらいも出せていなさそうだけどちょっと速くなる。
 - `bisect` に key として関数を渡せたら面白そうとも思ったけどできなさそうだった。
+
+
+
+## B: 002 - Encyclopedia of Parentheses（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_b)
+- [Tweet Link](https://twitter.com/e869120/status/1377027868518064129)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [b.py](src/b.py) | [link](https://atcoder.jp/contests/typical90/submissions/21934332) | AC | 99 ms |
+| Python (3.8.2) | [b_bitslow.py](src/b_bitslow.py) | [link](https://atcoder.jp/contests/typical90/submissions/21934351) | AC | 122 ms |
+
+
+### Memo
+- あまり御行儀はよくないが、最後まで潜ったタイミングで出力までやってしまうのが楽そう。
+- ```py
+  lis.append('(')
+  rec(rem - 1, lis, dep + 1)
+  lis[-1] = ')'
+  rec(rem - 1, lis, dep - 1)
+  lis.pop()
+  ```
+  の部分を
+  ```py
+  rec(rem - 1, lis + ['('], dep + 1)
+  rec(rem - 1, lis + [')'], dep - 1)
+  ```
+  と書くこともできこちらの方がシンプル（そのように変更したのが [b_bitslow.py](src/b_bitslow.py)）だが、毎回リストのコピーが生成されるので若干遅くなる。
