@@ -69,3 +69,4 @@
 - 木上のある点からの距離を求めるのに BFS を行っているが、ここで queue として `collections.deque` を使っている。
   - `queue.Queue` は存在するが、これはマルチスレッドに対応したキューであるため、シングルスレッドである場合は `collections.deque` を使う方が高速。
     - https://docs.python.org/ja/3/library/queue.html
+- `max` や `sort` などの関数は key として関数を渡すことができ、それにより argmax や argsort に相当する処理をすることが可能。
