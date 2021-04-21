@@ -51,3 +51,21 @@
   rec(rem - 1, lis + [')'], dep - 1)
   ```
   と書くこともできこちらの方がシンプル（そのように変更したのが [b_bitslow.py](src/b_bitslow.py)）だが、毎回リストのコピーが生成されるので若干遅くなる。
+
+
+
+## C: 003 - Longest Circular Road（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_c)
+- [Tweet Link](https://twitter.com/e869120/status/1377391097836544001)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [c.py](src/c.py) | [link](https://atcoder.jp/contests/typical90/submissions/21934691) | AC | 413 ms |
+| PyPy3 (7.3.0) | [c.py](src/c.py) | [link](https://atcoder.jp/contests/typical90/submissions/21934844) | AC | 301 ms |
+
+
+### Memo
+- 木上のある点からの距離を求めるのに BFS を行っているが、ここで queue として `collections.deque` を使っている。
+  - `queue.Queue` は存在するが、これはマルチスレッドに対応したキューであるため、シングルスレッドである場合は `collections.deque` を使う方が高速。
+    - https://docs.python.org/ja/3/library/queue.html
