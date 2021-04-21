@@ -70,3 +70,22 @@
   - `queue.Queue` は存在するが、これはマルチスレッドに対応したキューであるため、シングルスレッドである場合は `collections.deque` を使う方が高速。
     - https://docs.python.org/ja/3/library/queue.html
 - `max` や `sort` などの関数は key として関数を渡すことができ、それにより argmax や argsort に相当する処理をすることが可能。
+
+
+
+## D: 004 - Cross Sum（★2）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_d)
+- [Tweet Link](https://twitter.com/e869120/status/1377752658149175299)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935444) | AC | 1,975 ms |
+| PyPy3 (7.3.0) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935454) | AC | 833 ms |
+| Cython (0.29.16) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935466) | AC | 1,701 ms |
+
+
+### Memo
+- なんで通るのかよくわからない、少し書き方を変えると TLE したりする。
+- `sys.stdin.readline` を使ってみたり Numba + NumPy でも書いてみたりしたが速くはならなかった。
+- [気まぐれでこんなコードを書いてみたりもした（なんの意味が？）](src/d_evil.py)
