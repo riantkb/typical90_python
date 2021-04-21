@@ -109,5 +109,5 @@
 - [e_simple.py](src/e_simple.py) だと PyPy では通るが Python だと通らない。
   - simple と言いつつ `mul` 関数内は `B` が長さ 2 倍になっていたり mod を取るタイミングが調整されていたりするが……。
 - `mul` 関数内の処理を NumPy でまとめると Python でも通るようになる ([e_numpy.py](src/e_numpy.py))。
-- Numba を用いて JIT コンパイルを行うことで、700 ms 程度で通るようになる[e.py](src/e.py)。
+- Numba を用いて JIT コンパイルを行うことで、700 ms 程度で通るようになる ([e.py](src/e.py))。
   - AtCoder の環境では、他の言語がコンパイルするタイミングで代わりに一度入力を何も与えない状態で実行してくれるため、型を指定しかつ `cache=True` とすることで、JIT コンパイルの時間を実行時間に含めないようにすることが可能。
