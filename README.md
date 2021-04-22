@@ -111,3 +111,80 @@
 - `mul` 関数内の処理を NumPy でまとめると Python でも通るようになる ([e_numpy.py](src/e_numpy.py))。
 - Numba を用いて JIT コンパイルを行うことで、700 ms 程度で通るようになる ([e.py](src/e.py))。
   - AtCoder の環境では、他の言語がコンパイルするタイミングで代わりに一度入力を何も与えない状態で実行してくれるため、型を指定しかつ `cache=True` とすることで、JIT コンパイルの時間を実行時間に含めないようにすることが可能。
+
+
+
+## F: 006 - Smallest Subsequence（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_f)
+- [Tweet Link](https://twitter.com/e869120/status/1378840212449595393)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [f.py](src/f.py) | [link](https://atcoder.jp/contests/typical90/submissions/21936433) | AC | 79 ms |
+
+
+### Memo
+- 特になし
+
+
+
+## G: 007 - CP Classes（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_g)
+- [Tweet Link](https://twitter.com/e869120/status/1379202843622576130)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [g.py](src/g.py) | [link](https://atcoder.jp/contests/typical90/submissions/21947425) | AC | 866 ms | `bisect.bisect` |
+| PyPy3 (7.3.0) | [g.py](src/g.py) | [link](https://atcoder.jp/contests/typical90/submissions/21947931) | AC | 647 ms | `bisect.bisect` |
+| Python (3.8.2) | [g_2.py](src/g_2.py) | [link](https://atcoder.jp/contests/typical90/submissions/21947593) | AC | 983 ms | ソートしてからしゃくとり法 |
+| PyPy3 (7.3.0) | [g_2.py](src/g_2.py) | [link](https://atcoder.jp/contests/typical90/submissions/21947970) | AC | 886 ms | ソートしてからしゃくとり法 |
+| Python (3.8.2) | [g_numpy.py](src/g_numpy.py) | [link](https://atcoder.jp/contests/typical90/submissions/21947265) | AC | 1,137 ms | `numpy.searchsorted` |
+
+
+### Memo
+- C++ の `lower_bound` に対応するのが `bisect.bisect_left`、`upper_bound` に対応するのが `bisect.bisect_right`。
+  - `bisect.bisect` は `bisect.bisect_right` のエイリアス
+- a の両端に番兵を設置すると、`a[i-1]` や `a[i]` が配列外参照にならずに済み条件分岐を省くことができる。
+  - 番兵との距離が最短になってしまうと間違った答えを出力してしまうので注意。
+- `bisect.bisect` を N 回呼ぶより最初にソートしてしゃくとりをした方が速いかと思ったが、実際には遅くなった ([g_2.py](src/g_2.py))。
+- NumPy にも `bisect` と同等の `numpy.searchsorted` という関数があり、こちらはクエリとして `ndarray` を渡すこともできる。
+  - 同時に Numba によるコンパイルも行ってみたが、元の NumPy を用いないコードより遅くなった ([g_numpy.py](src/g_numpy.py))。
+    - まぁ `ndarray` の中身を for ループで回しているのはあまりよくなさそう。
+
+
+
+## H: 008 - AtCounter（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_h)
+- [Tweet Link](https://twitter.com/e869120/status/1379565222541680644)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [h.py](src/h.py) | [link](https://atcoder.jp/contests/typical90/submissions/21948343) | AC | 44 ms |
+
+
+### Memo
+- 特になし
+- 内包表記はリストだけではなく dict や set なども作ることが出来る。
+
+
+
+## I: 009 - Three Point Angle（★6）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_i)
+- [Tweet Link](https://twitter.com/e869120/status/1379927227739987972)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [i.py](src/i.py) | [link](https://atcoder.jp/contests/typical90/submissions/21956211) | AC | 2,286 ms | |
+| PyPy3 (7.3.0) | [i.py](src/i.py) | [link](https://atcoder.jp/contests/typical90/submissions/21956735) | AC | 920 ms | |
+| Python (3.8.2) | [i_numpy.py](src/i_numpy.py) | [link](https://atcoder.jp/contests/typical90/submissions/21956672) | AC | 1,128 ms | Using Numba, Numpy |
+
+
+### Memo
+- 二次元平面上の距離、角度等を求めたいときは複素数 `complex` を用いると楽なことがある。
+- 番兵を置いたりしているところは G 問題と同様
+- `cmath.phase` や `numpy.angle` でなす角（atan2 に相当）を求めることができる。
+  - これを用いると偏角ソートができるが、計算誤差の関係で非常に大きさの近い 2 つの角度を正確に比較できないことに注意。
