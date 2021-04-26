@@ -209,3 +209,21 @@
   - `sys.stdin.readline` の場合、行末の改行も含んだ文字列を返すことに注意。
     - 整数型に変換する際は読み飛ばしてくれるので問題ないが、文字列として処理する際は意図しない挙動になる可能性がある。
   - `s = sys.stdin.readline().strip()` などというように `strip` 関数を用いることで除去できる。
+
+
+
+## K: 011 - Gravy Jobs（★6）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_k)
+- [Tweet Link](https://twitter.com/e869120/status/1380652465834532865)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [k_naive.py](src/k_naive.py) | [link](https://atcoder.jp/contests/typical90/submissions/22099338) | TLE | > 2,000 ms | |
+| Python (3.8.2) | [k.py](src/k.py) | [link](https://atcoder.jp/contests/typical90/submissions/22099396) | AC | 161 ms | Using NumPy |
+
+
+### Memo
+- 単純な DP だが、普通に書くと TLE する（[k_naive.py](src/k_naive.py)）。
+- NumPy を使うと区間代入みたいなことができる（計算量自体は長さ分かかるが、定数倍がかなり軽い）ので、それをするとかなり速くなる（[k.py](src/k.py)）。
+- Numba を用いてコンパイル（JIT キャッシュあり）もしてみたが、なぜかかなり遅くなった（530 ms ほどになった）。
