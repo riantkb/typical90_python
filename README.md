@@ -188,3 +188,24 @@
 - 番兵を置いたりしているところは G 問題と同様
 - `cmath.phase` や `numpy.angle` でなす角（atan2 に相当）を求めることができる。
   - これを用いると偏角ソートができるが、計算誤差の関係で非常に大きさの近い 2 つの角度を正確に比較できないことに注意。
+
+
+
+## J: 010 - Score Sum Queries（★2）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_j)
+- [Tweet Link](https://twitter.com/e869120/status/1380290146340245505)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [j.py](src/j.py) | [link](https://atcoder.jp/contests/typical90/submissions/21972607) | AC | 632 ms | |
+| Python (3.8.2) | [j_stdin.py](src/j_stdin.py) | [link](https://atcoder.jp/contests/typical90/submissions/21974272) | AC | 256 ms | Using `sys.stdin.readline` |
+
+
+### Memo
+- `itertools.accumulate` で累積和が計算できる。
+  - 適用する関数を指定することで累積積や累積 XOR なども計算可能。
+- 入力が多い場合は、`input` の代わりに `sys.stdin.readline` を使用することで高速になることがある。
+  - `sys.stdin.readline` の場合、行末の改行も含んだ文字列を返すことに注意。
+    - 整数型に変換する際は読み飛ばしてくれるので問題ないが、文字列として処理する際は意図しない挙動になる可能性がある。
+  - `s = sys.stdin.readline().strip()` などというように `strip` 関数を用いることで除去できる。
