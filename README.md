@@ -227,3 +227,21 @@
 - 単純な DP だが、普通に書くと TLE する（[k_naive.py](src/k_naive.py)）。
 - NumPy を使うと区間代入みたいなことができる（計算量自体は長さ分かかるが、定数倍がかなり軽い）ので、それをするとかなり速くなる（[k.py](src/k.py)）。
 - Numba を用いてコンパイル（JIT キャッシュあり）もしてみたが、なぜかかなり遅くなった（530 ms ほどになった）。
+
+
+
+## L: 012 - Red Painting（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_l)
+- [Tweet Link](https://twitter.com/e869120/status/1381376542836596737)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [l.py](src/l.py) | [link](https://atcoder.jp/contests/typical90/submissions/22099849) | AC | 482 ms |  |
+| Python (3.8.2) | [l_jitclass.py](src/l_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/22112158) | AC | 1,529 ms | Using `numba.jitclass` |
+
+
+### Memo
+- Numba では class も JIT コンパイルすることができる（[l_jitclass.py](src/l_jitclass.py)）。
+  - `jitclass` のある位置が Numba のバージョンにより異なるので注意（AtCoder のジャッジ (0.48.0) では `numba.jitclass`、手元 (0.53.1) では `numba.experimental.jitclass`）。
+  - cache オプションがないためコンパイルの時間も計算時間に含まれてしまい、普通に書くより遅くはなる。
