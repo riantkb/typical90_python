@@ -245,3 +245,22 @@
 - Numba では class も JIT コンパイルすることができる（[l_jitclass.py](src/l_jitclass.py)）。
   - `jitclass` のある位置が Numba のバージョンにより異なるので注意（AtCoder のジャッジ (0.48.0) では `numba.jitclass`、手元 (0.53.1) では `numba.experimental.jitclass`）。
   - cache オプションがないためコンパイルの時間も計算時間に含まれてしまい、普通に書くより遅くはなる。
+
+
+
+## M: 013 - Passing（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_m)
+- [Tweet Link](https://twitter.com/e869120/status/1381739128291614720)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [m.py](src/m.py) | [link](https://atcoder.jp/contests/typical90/submissions/22132326) | AC | 795 ms |  |
+| Python (3.8.2) | [m_scipy.py](src/m_scipy.py) | [link](https://atcoder.jp/contests/typical90/submissions/22131824) | TLE | > 2,000 ms | Using SciPy |
+
+
+### Memo
+- 優先度つきキューは `heapq` のメソッドで実現できる。
+  - `queue.PriorityQueue` も存在するが、C 問題で触れた `Queue` と同様にマルチスレッド対応なので `heapq` の方が高速（なはず）。
+- SciPy にいくつかのグラフアルゴリズムが実装されており `dijkstra` も存在するが、TLE した（[m_scipy.py](src/m_scipy.py)）。
+  - コストの計算に float64 を用いている（変更不可）ことが原因？
