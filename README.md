@@ -264,3 +264,19 @@
   - `queue.PriorityQueue` も存在するが、C 問題で触れた `Queue` と同様にマルチスレッド対応なので `heapq` の方が高速（なはず）。
 - SciPy にいくつかのグラフアルゴリズムが実装されており `dijkstra` も存在するが、TLE した（[m_scipy.py](src/m_scipy.py)）。
   - コストの計算に float64 を用いている（変更不可）ことが原因？
+
+
+
+## N: 014 - We Used to Sing a Song Together（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_n)
+- [Tweet Link](https://twitter.com/e869120/status/1382101716066127872)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [n.py](src/n.py) | [link](https://atcoder.jp/contests/typical90/submissions/22132880) | AC | 117 ms |
+
+
+### Memo
+- 特になし
+- 二次元リストを転置するのは `a = [ list(i) for i in zip(*a) ]` でできる
