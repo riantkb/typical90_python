@@ -279,4 +279,68 @@
 
 ### Memo
 - 特になし
-- 二次元リストを転置するのは `a = [ list(i) for i in zip(*a) ]` でできる
+- 二次元リストを転置するのは `a = [ list(i) for i in zip(*a) ]` でできる。
+
+
+
+## O: 015 - Don't be too close（★6）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_o)
+- [Tweet Link](https://twitter.com/e869120/status/1382478816627478530)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [o.py](src/o.py) | [link](https://atcoder.jp/contests/typical90/submissions/22524857) | AC | 863 ms |
+| Python (3.8.2) | [o_2.py](src/o_2.py) | [link](https://atcoder.jp/contests/typical90/submissions/22524871) | AC | 741 ms |
+
+
+### Memo
+- 階乗テーブルを計算するときも `itertools.accumulate` が使える。
+  - 普通に for 文で回すのとほとんど実行時間に変化はなかった……。
+- main の内側の for ループを無理矢理内包表記にすると若干速くなる（[o_2.py](src/o_2.py)）。
+
+
+
+## P: 016 - Minimum Coins（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_p)
+- [Tweet Link](https://twitter.com/e869120/status/1382827276673306624)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [p.py](src/p.py) | [link](https://atcoder.jp/contests/typical90/submissions/22512078) | TLE | > 2,000 ms |
+| PyPy3 (7.3.0) | [p.py](src/p.py) | [link](https://atcoder.jp/contests/typical90/submissions/22512082) | AC | 1,247 ms |
+| Python (3.8.2) | [p_fast.py](src/p_fast.py) | [link](https://atcoder.jp/contests/typical90/submissions/22512784) | AC | 32 ms |
+
+
+### Memo
+- 以下、 `M = 10000（枚数の上限）, X = max(A, B, C)` とする
+- 想定解の `O(M^2)` は当然（？）Python では通らない。
+  - PyPy では通る。
+- この問題にはより高速な解法が存在するので、そちらで AC することにする。
+  - 拡張ユークリッドの互除法を用いることにより、例えば「A 円硬貨, B 円硬貨の 2 種類の硬貨でちょうど N 円を支払うとき、あり得る支払い方のうち B 円硬貨の枚数が最少であるものを求めよ」という問題に高速に答えられる。
+  - なので、A 円硬貨の枚数を決め打ちした上で、B 円硬貨、C 円硬貨に対し上の問題を解くことで元の問題の解答が得られる（B > C としておけば、C 円硬貨の枚数が最少であるものが B 円硬貨と C 円硬貨の枚数の合計も最少であることが保証できる）。
+  - 拡張ユークリッドの互除法は B, C に対するものを一度だけ行えばよいので、計算量は `O(M + log X)` となる。
+  - 提出してみると 32 ms、かなり速い（[p_fast.py](src/p_fast.py)）。
+
+
+
+## Q: 017 - Crossing Segments（★7）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_q)
+- [Tweet Link](https://twitter.com/e869120/status/1383189464650981378)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522427) | TLE | > 2,000 ms |
+| PyPy3 (7.3.0) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22526684) | AC | 1,239 ms |
+| Python (3.8.2) | [q_numba.py](src/q_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/22523343) | AC | 1,716 ms |
+| Python (3.8.2) | [q_jitclass.py](src/q_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522751) | AC | 1,909 ms |
+
+
+### Memo
+- 公式解説と若干異なる解き方をした。
+  - L の小さい順（L が等しい場合は R の大きい順）に見ることで、「 `[L+1, R)` に R が入るような要素」が自分より前に見た要素の中で自分と交わるものなので、その個数を求めればよい。
+- 普通に書くと Python では TLE する（[q.py](src/q.py)）ため、Numba を用いてコンパイルした。
+  - BIT の中身をバラすと 1,700 ms ほど（[q_numba.py](src/q_numba.py)）、そのまま `jitclass` で実行時コンパイルしても 1,900 ms ほどで通った（[q_jitclass.py](src/q_jitclass.py)）。
+    - BIT の class の中身がそこまで大きくないのでコンパイルにそこまで時間がかからなかった？
