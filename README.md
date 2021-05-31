@@ -473,3 +473,21 @@
 
 ### Memo
 - 特になし
+
+
+
+## Y: 025 - Digit Product Equation（★7）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_y)
+- [Tweet Link](https://twitter.com/e869120/status/1386814047081746432)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [y.py](src/y.py) | [link](https://atcoder.jp/contests/typical90/submissions/23100157) | AC | 103 ms |
+
+
+### Memo
+- 解説とは違い `f(x)` を列挙する解法
+- `f(x) = 2**a + 3**b + 5**c + 7**d  または  f(x) = 0` という形で表されるので、 `f(x)` は高々 `40 * 30 * 20 * 15` 通りくらい調べればよい（実際にはもっと少ない）。
+- `f(x)` の列挙は、 `itertools.product` で複数リストの直積が生成できるのでこれが使える。
+  - 実際には四重ループを回して適宜枝刈りした方が速いかもしれない。
