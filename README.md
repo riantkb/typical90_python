@@ -226,7 +226,8 @@
 ### Memo
 - 単純な DP だが、普通に書くと TLE する（[k_naive.py](src/k_naive.py)）。
 - NumPy を使うと区間代入みたいなことができる（計算量自体は長さ分かかるが、定数倍がかなり軽い）ので、それをするとかなり速くなる（[k.py](src/k.py)）。
-- Numba を用いてコンパイル（JIT キャッシュあり）もしてみたが、なぜかかなり遅くなった（530 ms ほどになった）。
+- Numba を用いてコンパイル（JIT キャッシュあり）もしてみたが、かなり遅くなった（530 ms ほどになった）。
+  - `import numba` で Numba を読み込むのに 400 ms 近くかかるのが原因と思われる。
 
 
 
@@ -330,12 +331,13 @@
 - [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_q)
 - [Tweet Link](https://twitter.com/e869120/status/1383189464650981378)
 
-| Submission Language | Source Code | Submission | Verdict | Exec Time |
-| :--- | :---: | :---: | :---: | ---: |
-| Python (3.8.2) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522427) | TLE | > 2,000 ms |
-| PyPy3 (7.3.0) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22526684) | AC | 1,239 ms |
-| Python (3.8.2) | [q_numba.py](src/q_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/22523343) | AC | 1,716 ms |
-| Python (3.8.2) | [q_jitclass.py](src/q_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522751) | AC | 1,909 ms |
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522427) | TLE | > 2,000 ms | |
+| PyPy3 (7.3.0) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22526684) | AC | 1,239 ms | |
+| Python (3.8.2) | [q_numba.py](src/q_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/22523343) | AC | 1,716 ms | Using Numba |
+| Python (3.8.2) | [q_jitclass.py](src/q_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522751) | AC | 1,909 ms | Using `numba.jitclass` |
+| Python (3.8.2) | [q_aot.py](src/q_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/22756545) | AC | 1,241 ms | Using Numba AOT |
 
 
 ### Memo
@@ -344,3 +346,115 @@
 - 普通に書くと Python では TLE する（[q.py](src/q.py)）ため、Numba を用いてコンパイルした。
   - BIT の中身をバラすと 1,700 ms ほど（[q_numba.py](src/q_numba.py)）、そのまま `jitclass` で実行時コンパイルしても 1,900 ms ほどで通った（[q_jitclass.py](src/q_jitclass.py)）。
     - BIT の class の中身がそこまで大きくないのでコンパイルにそこまで時間がかからなかった？
+  - AOT（事前コンパイル）ならば jitclass でも関係なく使える。Numba の読み込み時間も削れるため高速になる（[q_aot.py](src/q_aot.py)）。
+    - https://numba.pydata.org/numba-doc/dev/user/pycc.html
+
+
+
+## R: 018 - Statue of Chokudai（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_r)
+- [Tweet Link](https://twitter.com/e869120/status/1383913627325853696)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [r.py](src/r.py) | [link](https://atcoder.jp/contests/typical90/submissions/22546722) | AC | 27 ms |
+
+
+### Memo
+- 特になし
+- `math.hypot` は引数の二乗和の平方根を取る関数、べつに自分で計算してもよい。
+  - https://docs.python.org/ja/3/library/math.html#math.hypot
+- `math.degrees` は引数をラジアンから度数法に変換したものを返す関数、べつに自分で計算してもよい。
+
+
+
+## S: 019 - Pick Two（★6）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_s)
+- [Tweet Link](https://twitter.com/e869120/status/1384276005330690049)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [s.py](src/s.py) | [link](https://atcoder.jp/contests/typical90/submissions/22546996) | AC | 713 ms | |
+| Python (3.8.2) | [s_numpy.py](src/s_numpy.py) | [link](https://atcoder.jp/contests/typical90/submissions/22546963) | AC | 401 ms | Using NumPy |
+| Python (3.8.2) | [s_cache.py](src/s_cache.py) | [link](https://atcoder.jp/contests/typical90/submissions/22547101) | AC | 1,430 ms | メモ化再帰 |
+| Python (3.8.2) | [s_cache_2.py](src/s_cache_2.py) | [link](https://atcoder.jp/contests/typical90/submissions/22547107) | AC | 1,089 ms | Using `functools.lru_cache` |
+
+
+### Memo
+- 一見 `400 ** 3` の区間 DP なので、適当にやると TLE しがち
+  - よく見ると区間の長さが偶数であるものしか考えなくてよいので定数倍が 1/4 ほどになり、愚直に Python で実装しても余裕を持って通るようになる（[s.py](src/s.py)）。
+- DP の遷移が、いくつかの一次元配列を要素ごとに和をとったものの min、というような形になっているので、Numpy で内側のループを消してあげると少し高速になる（[s_numpy.py](src/s_numpy.py)）。
+- メモ化再帰でも実装してみる。普通にメモ用の配列を用意して実装すると 1,400 ms ほど（[s_cache.py](src/s_cache.py)）。
+  - `functools.lru_cache` を用いると自動でメモ化を行ってくれて、それを用いると 1,100 ms ほどになった（[s_cache_2.py](src/s_cache_2.py)）。
+    - 思ったより速い。これは引数はハッシュ関数さえ定義されていればなんでもメモ化できることもありかなり良さそう。
+
+
+
+## T: 020 - Log Inequality（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_t)
+- [Tweet Link](https://twitter.com/e869120/status/1384638694162780166)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [t.py](src/t.py) | [link](https://atcoder.jp/contests/typical90/submissions/22547123) | AC | 24 ms |
+
+
+### Memo
+- 特になし
+- Python はオーバーフローをあまり気にせず計算できたり整数の累乗があったりしてうれしいね。
+
+
+
+## U: 021 - Come Back in One Piece（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_u)
+- [Tweet Link](https://twitter.com/e869120/status/1385001057512693762)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [u.py](src/u.py) | [link](https://atcoder.jp/contests/typical90/submissions/22754869) | AC | 452 ms | Using SciPy |
+
+
+### Memo
+- 強連結成分分解をする問題。SciPy に連結成分分解をする関数が存在するのでそれが使える。
+  - https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.connected_components.html
+
+
+
+## V: 022 - Cubic Cake（★2）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_v)
+- [Tweet Link](https://twitter.com/e869120/status/1385363292739104775)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [v.py](src/v.py) | [link](https://atcoder.jp/contests/typical90/submissions/22754939) | AC | 29 ms |
+| Python (3.8.2) | [v_reduce.py](src/v_reduce.py) | [link](https://atcoder.jp/contests/typical90/submissions/22754967) | AC | 37 ms |
+
+
+### Memo
+- 特になし
+- `math.gcd` は 2 引数に対してのみ定義されているため、3 個以上の数の gcd を取りたい場合は `gcd(gcd(a, b), c)` などとするか、`functools.reduce` を使う必要がある。
+
+
+
+## W: 023 - Avoid War（★7）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_w)
+- [Tweet Link](https://twitter.com/e869120/status/1385725481920520193)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| PyPy3 (7.3.0) | [w.py](src/w.py) | [link](https://atcoder.jp/contests/typical90/submissions/22756124) | AC | 6,068 ms | |
+| Python (3.8.2) | [w_numba.py](src/w_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/22756564) | AC | 7,716 ms | Using Numba AOT |
+
+
+### Memo
+- かなりしんどい
+- 左から k マス目からの連続する W+1 個のマスについての valid な置き方を列挙（これの通り数は `2**(W+1)` よりはずいぶん小さくなる）し、キングを 1 つ置く／置かないについての遷移先をあらかじめ求めておく。
+  - 適当なことをするとすぐ計算量に `2**W` がかかってきて死ぬ。
+- 当然このままだと Python (not PyPy) では通らないが、Numba で JIT コンパイルすると 8,200 ms くらいになるのが伺える。
+  - AOT にして　Numba の読み込み時間を削減してギリギリ AC（[w_numba.py](src/w_numba.py)）。
