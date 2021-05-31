@@ -458,3 +458,18 @@
   - 適当なことをするとすぐ計算量に `2**W` がかかってきて死ぬ。
 - 当然このままだと Python (not PyPy) では通らないが、Numba で JIT コンパイルすると 8,200 ms くらいになるのが伺える。
   - AOT にして Numba の読み込み時間を削減してギリギリ AC（[w_numba.py](src/w_numba.py)）。
+
+
+
+## X: 024 - Select +／- One（★2）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_x)
+- [Tweet Link](https://twitter.com/e869120/status/1386449961072553990)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [x.py](src/x.py) | [link](https://atcoder.jp/contests/typical90/submissions/23099171) | AC | 27 ms |
+
+
+### Memo
+- 特になし
