@@ -524,3 +524,21 @@
 - 特になし
 - 登場した文字列を set で管理すれば良い
   - dict でもよい
+
+
+
+## AB: 028 - Cluttered Paper（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ab)
+- [Tweet Link](https://twitter.com/e869120/status/1387901052683386880)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [ab.py](src/ab.py) | [link](https://atcoder.jp/contests/typical90/submissions/23119287) | AC | 507 ms | |
+| Python (3.8.2) | [ab_counter.py](src/ab_counter.py) | [link](https://atcoder.jp/contests/typical90/submissions/23119737) | AC | 616 ms | Using `collections.Counter` |
+
+
+### Memo
+- 特になし
+- 配列内の各要素の出現回数などは `collections.Counter` でも取得できる（[ab_counter.py](src/ab_counter.py)）。
+  - 出力時に dict への添字アクセスをするので少し遅くなる。
