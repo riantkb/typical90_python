@@ -507,3 +507,20 @@
 ### Memo
 - 特になし
 - BFS の部分は C 問題のときとほぼ同じ。
+
+
+
+## AA: 027 - Sign Up Requests （★2）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_aa)
+- [Tweet Link](https://twitter.com/e869120/status/1387538790017769474)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [aa.py](src/aa.py) | [link](https://atcoder.jp/contests/typical90/submissions/23118777) | AC | 96 ms |
+
+
+### Memo
+- 特になし
+- 登場した文字列を set で管理すれば良い
+  - dict でもよい
