@@ -242,13 +242,16 @@
 | Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
 | :--- | :---: | :---: | :---: | ---: | :---: |
 | Python (3.8.2) | [l.py](src/l.py) | [link](https://atcoder.jp/contests/typical90/submissions/22099849) | AC | 482 ms |  |
-| Python (3.8.2) | [l_jitclass.py](src/l_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/22112158) | AC | 1,529 ms | Using `numba.jitclass` |
+| Python (3.8.2) | [l_jitclass.py](src/l_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/23136535) | AC | 559 ms | Using `numba.jitclass` |
+| Python (3.8.2) | [l_aot.py](src/l_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/23136675) | AC | 179 ms | Using Numba AOT |
 
 
 ### Memo
 - Numba では class も JIT コンパイルすることができる（[l_jitclass.py](src/l_jitclass.py)）。
   - `jitclass` のある位置が Numba のバージョンにより異なるので注意（AtCoder のジャッジ (0.48.0) では `numba.jitclass`、手元 (0.53.1) では `numba.experimental.jitclass`）。
-  - cache オプションがないためコンパイルの時間も計算時間に含まれてしまい、普通に書くより遅くはなる。
+  - cache オプションがないためコンパイルの時間も計算時間に含まれてしまい、また Numba の読み込み時間もかかるため今回は普通に書くより遅くなる。
+- AOT（事前コンパイル）ならば jitclass でも関係なく使える。Numba の読み込み時間も削れるためかなり高速になる（[l_aot.py](src/l_aot.py)）。
+  - https://numba.pydata.org/numba-doc/dev/user/pycc.html
 
 
 

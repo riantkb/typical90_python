@@ -1,10 +1,9 @@
-import sys
 import numpy as np
 import numba
-# from numba.experimental import jitclass
-from numba import jitclass
-
-input = sys.stdin.readline
+try:
+    from numba.experimental import jitclass
+except ImportError:
+    from numba import jitclass
 
 
 @jitclass([("parent_or_size", numba.int32[:]), ])
@@ -40,27 +39,31 @@ class union_find:
         return True
 
 
-def main():
-    h, w = map(int, input().split())
+@numba.njit('void(int32[:])', cache=True)
+def main(inp):
+    h, w, q = inp[:3]
     uf = union_find(h * w)
-    painted = [False for _ in range(h * w)]
+    painted = np.zeros((h, w), dtype=np.bool8)
     adj = ((0, 1), (1, 0), (0, -1), (-1, 0))
-    q = int(input())
+    idx = 3
     for _ in range(q):
-        t, *a = [int(i) - 1 for i in input().split()]
-        if t == 0:
-            i, j = a
-            painted[i * w + j] = True
+        t = inp[idx]
+        idx += 1
+        if t == 1:
+            i, j = inp[idx: idx + 2] - 1
+            idx += 2
+            painted[i, j] = True
             for di, dj in adj:
                 ti = i + di
                 tj = j + dj
-                if 0 <= ti < h and 0 <= tj < w and painted[ti * w + tj]:
+                if 0 <= ti < h and 0 <= tj < w and painted[ti, tj]:
                     uf.union(i * w + j, ti * w + tj)
         else:
-            i1, j1, i2, j2 = a
-            print("Yes" if painted[i1 * w + j1]
+            i1, j1, i2, j2 = inp[idx: idx + 4] - 1
+            idx += 4
+            print("Yes" if painted[i1, j1]
                   and uf.same(i1 * w + j1, i2 * w + j2) else "No")
 
 
 if __name__ == "__main__":
-    main()
+    main(np.fromstring(open(0).read(), dtype=np.int32, sep=' '))
