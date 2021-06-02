@@ -342,15 +342,15 @@
 | Python (3.8.2) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522427) | TLE | > 2,000 ms | |
 | PyPy3 (7.3.0) | [q.py](src/q.py) | [link](https://atcoder.jp/contests/typical90/submissions/22526684) | AC | 1,239 ms | |
 | Python (3.8.2) | [q_numba.py](src/q_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/22523343) | AC | 1,716 ms | Using Numba |
-| Python (3.8.2) | [q_jitclass.py](src/q_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/22522751) | AC | 1,909 ms | Using `numba.jitclass` |
-| Python (3.8.2) | [q_aot.py](src/q_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/22756545) | AC | 1,241 ms | Using Numba AOT |
+| Python (3.8.2) | [q_jitclass.py](src/q_jitclass.py) | [link](https://atcoder.jp/contests/typical90/submissions/23138005) | AC | 1,800 ms | Using `numba.jitclass` |
+| Python (3.8.2) | [q_aot.py](src/q_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/23138014) | AC | 1,230 ms | Using Numba AOT |
 
 
 ### Memo
 - 公式解説と若干異なる解き方をした。
   - L の小さい順（L が等しい場合は R の大きい順）に見ることで、「 `[L+1, R)` に R が入るような要素」が自分より前に見た要素の中で自分と交わるものなので、その個数を求めればよい。
 - 普通に書くと Python では TLE する（[q.py](src/q.py)）ため、Numba を用いてコンパイルした。
-  - BIT の中身をバラすと 1,700 ms ほど（[q_numba.py](src/q_numba.py)）、そのまま `jitclass` で実行時コンパイルしても 1,900 ms ほどで通った（[q_jitclass.py](src/q_jitclass.py)）。
+  - BIT の中身をバラすと 1,700 ms ほど（[q_numba.py](src/q_numba.py)）、そのまま `jitclass` で実行時コンパイルしても 1,800 ms ほどで通った（[q_jitclass.py](src/q_jitclass.py)）。
     - BIT の class の中身がそこまで大きくないのでコンパイルにそこまで時間がかからなかった？
   - AOT（事前コンパイル）ならば jitclass でも関係なく使える。Numba の読み込み時間も削れるため高速になる（[q_aot.py](src/q_aot.py)）。
     - https://numba.pydata.org/numba-doc/dev/user/pycc.html

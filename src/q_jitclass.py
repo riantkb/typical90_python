@@ -1,8 +1,10 @@
 import sys
 import numpy as np
 import numba
-# from numba.experimental import jitclass
-from numba import jitclass
+try:
+    from numba.experimental import jitclass
+except ImportError:
+    from numba import jitclass
 
 input = sys.stdin.readline
 

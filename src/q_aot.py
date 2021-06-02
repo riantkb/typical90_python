@@ -14,8 +14,10 @@ def main():
 if __name__ == "__main__":
     if sys.argv[-1] == 'ONLINE_JUDGE':
         import numba
-        # from numba.experimental import jitclass
-        from numba import jitclass
+        try:
+            from numba.experimental import jitclass
+        except ImportError:
+            from numba import jitclass
         from numba.pycc import CC
 
         @jitclass([("n", numba.int32), ("data", numba.int64[:]), ])
