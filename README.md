@@ -78,16 +78,19 @@
 - [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_d)
 - [Tweet Link](https://twitter.com/e869120/status/1377752658149175299)
 
-| Submission Language | Source Code | Submission | Verdict | Exec Time |
-| :--- | :---: | :---: | :---: | ---: |
-| Python (3.8.2) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935444) | AC | 1,975 ms |
-| PyPy3 (7.3.0) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935454) | AC | 833 ms |
-| Cython (0.29.16) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935466) | AC | 1,701 ms |
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935444) | AC | 1,975 ms | |
+| PyPy3 (7.3.0) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935454) | AC | 833 ms | |
+| Cython (0.29.16) | [d.py](src/d.py) | [link](https://atcoder.jp/contests/typical90/submissions/21935466) | AC | 1,701 ms | |
+| Python (3.8.2) | [d_aot.py](src/d_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/23135463) | AC | 1,537 ms | Using Numba AOT |
 
 
 ### Memo
 - なんで通るのかよくわからない、少し書き方を変えると TLE したりする。
 - `sys.stdin.readline` を使ってみたり Numba + NumPy でも書いてみたりしたが速くはならなかった。
+- Numba で AOT コンパイルすると 1,550 ms ほどで通った（[d_aot.py](src/d_aot.py)）。
+  - JIT コンパイルでも一応 1,950 ms ほどで通った。差の 400 ms は基本的に numba の読み込み時間と思われる。
 - [気まぐれでこんなコードを書いてみたりもした（なんの意味が？）](src/d_evil.py)
 
 
