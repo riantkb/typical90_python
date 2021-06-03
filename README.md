@@ -548,3 +548,35 @@
 - 特になし
 - 配列内の各要素の出現回数などは `collections.Counter` でも取得できる（[ab_counter.py](src/ab_counter.py)）。
   - 出力時に dict への添字アクセスをするので少し遅くなる。
+
+
+
+## AC: 029 - Long Bricks（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ac)
+- [Tweet Link](https://twitter.com/e869120/status/1388262816101007363)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [ac.py](src/ac.py) | [link](https://atcoder.jp/contests/typical90/submissions/23120242) | TLE | > 4,000 ms | |
+| PyPy3 (7.3.0) | [ac.py](src/ac.py) | [link](https://atcoder.jp/contests/typical90/submissions/23120230) | AC | 1,058 ms | |
+| Python (3.8.2) | [ac_numba.py](src/ac_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/23125259) | AC | 2,255 ms | Using Numba |
+| Python (3.8.2) | [ac_aot.py](src/ac_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/23125429) | AC | 1,871 ms | Using Numba AOT |
+
+
+
+### Memo
+- 遅延セグメント木は以下のプロジェクトのコードを使用させていただきました。
+  - https://github.com/not522/ac-library-python
+  - 普通にかなり速く、PyPy で 1,000 ms ほどで通る（[ac.py](src/ac.py)）。
+- コードを少し変更して Numba でコンパイルすると 2,200 ms ほどで通り（[ac_numba.py](src/ac_numba.py)）、AOT にすると 1,900 ms になった（[ac_aot.py](src/ac_aot.py)）。
+- Numba でコンパイルできるようにするために、以下の変更を行った。
+  - Python の List より NumPy の ndarray の方が相性が良く速いのでそちらに変更。
+    - この辺は最近のアップデートで変わった？ 少なくとも AtCoder の Numba のバージョン (0.48.0) ではそう。
+  - isinstance が Numba では使えないため、初期値配列 (ndarray) のみを受け取れるように変更
+- `TYPE_FUNC` に関しては、手元 (0.53.1) では
+  ```
+  TYPE_FUNC = numba.types.FunctionType(numba.types.int64(numba.types.int64, numba.types.int64))
+  ```
+  と定義すればよかったが、AtCoder 上のバージョンでは `numba.types.FunctionType` が存在せず、代わりのものが見つからなかったため実際に与える関数の型を `numba.typeof` で取得することで解決した。
+- [この行](src/ac_numba.py#L246) で `cache=True` としているが、実際にはグローバル関数 `f` を参照しているためキャッシュできないという警告が出される。引数で `f` を与えるようにしてあげれば良いが、AtCoder 上では動かなかった。
