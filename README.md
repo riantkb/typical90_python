@@ -580,3 +580,29 @@
   ```
   と定義すればよかったが、AtCoder 上のバージョンでは `numba.types.FunctionType` が存在せず、代わりのものが見つからなかったため実際に与える関数の型を `numba.typeof` で取得することで解決した。
 - [この行](src/ac_numba.py#L246) で `cache=True` としているが、実際にはグローバル関数 `f` を参照しているためキャッシュできないという警告が出される。引数で `f` を与えるようにしてあげれば良いが、AtCoder 上では動かなかった。
+
+
+
+## AD: 030 - K Factors（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ad)
+- [Tweet Link](https://twitter.com/e869120/status/1388987881977389059)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| PyPy3 (7.3.0) | [ad.py](src/ad.py) | [link](https://atcoder.jp/contests/typical90/submissions/23155703) | AC | 567 ms | |
+| Python (3.8.2) | [ad_numba.py](src/ad_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/23155654) | AC | 962 ms | Using Numba |
+
+
+### Memo
+- 普通に書くと PyPy では 600 ms 程度で通るが Python では TLE する（最大ケースが手元で 4.5 sec 程度だった）（[ad.py](src/ad.py)）。
+  - 長さ `N` の 0 埋めされた配列 `a` を宣言する際、
+    ```
+    a = [0 for _ in range(N)]
+    ```
+    とする他に
+    ```
+    a = [0] * N
+    ```
+    と書くこともでき、下の方が高速になる。今回のように N が非常に大きい時は速度の差が顕著となる。
+- NumPy のスライスによる範囲加算を用いることで高速化でき、Numba も用いることで 960 ms ほどで通った（[ad_numba.py](src/ad_numba.py)）。
