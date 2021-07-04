@@ -692,3 +692,30 @@
     - Typed List を使えばできるはずだが、AtCoder の Numba は少しバージョンが古いので速度が少し不安？
   - deque が使えないのと関数内再帰関数がほとんど使えないので LCA 初期化時に DFS も BFS もしづらい
     - List の append/pop で DFS ができる
+
+
+
+## AJ: 036 - Max Manhattan Distance（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_aj)
+- [Tweet Link](https://twitter.com/e869120/status/1391523624897499136)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [aj.py](src/aj.py) | [link](https://atcoder.jp/contests/typical90/submissions/23946525) | AC | 335 ms |
+
+
+### Memo
+- `|x| = max(x, -x)` であることを踏まえると、
+  ```
+  |x - X| + |y - Y| = max((x - X) + (y - Y), (x - X) - (y - Y), -(x - X) + (y - Y), -(x - X) - (y - Y))
+                    = max((x + y) - (X + Y), (x - y) - (X - Y), (-x + y) - (-X + Y), (-x - y) - (-X - Y))
+  ```
+  となるので、
+  ```
+  max_{(x, y)}(|x - X| + |y - Y|) = max( max_{(x, y)}(x + y) - (X + Y),
+                                         max_{(x, y)}(x - y) - (X - Y),
+                                         max_{(x, y)}(-x + y) - (-X + Y),
+                                         max_{(x, y)}(-x - y) - (-X - Y) )
+  ```
+  となり、結局 `x + y, x - y, -x + y, -x - y` それぞれの最大値だけ持っておけば任意の位置からのマンハッタン距離の最大値が得られることがわかる。
