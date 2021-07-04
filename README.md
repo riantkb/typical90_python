@@ -640,3 +640,18 @@
 
 ### Memo
 - 想定解は順列全探索だが、bitDP で通した。
+
+
+
+## AG: 033 - Not Too Bright（★2）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ag)
+- [Tweet Link](https://twitter.com/e869120/status/1390074137192767489)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [ag.py](src/ag.py) | [link](https://atcoder.jp/contests/typical90/submissions/23941854) | AC | 25 ms |
+
+
+### Memo
+- 特になし
