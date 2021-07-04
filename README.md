@@ -625,3 +625,18 @@
 - 普通に grundy 数のテーブルを埋めていくと PyPy では通るが Python だと TLE する（手元で 5 sec ほど）（[ae.py](src/ae.py)）。
 - Numba で高速化すると通るようになる（[ae_numba.py](src/ae_numba.py)）。
   - AOT にすると 200 ms ほどになった。
+
+
+
+## AF: 032 - AtCoder Ekiden（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_af)
+- [Tweet Link](https://twitter.com/e869120/status/1389711962213261316)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [af.py](src/af.py) | [link](https://atcoder.jp/contests/typical90/submissions/23941679) | AC | 67 ms |
+
+
+### Memo
+- 想定解は順列全探索だが、bitDP で通した。
