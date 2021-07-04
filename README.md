@@ -719,3 +719,24 @@
                                          max_{(x, y)}(-x - y) - (-X - Y) )
   ```
   となり、結局 `x + y, x - y, -x + y, -x - y` それぞれの最大値だけ持っておけば任意の位置からのマンハッタン距離の最大値が得られることがわかる。
+
+
+
+## AK: 037 - Don't Leave the Spice（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ak)
+- [Tweet Link](https://twitter.com/e869120/status/1391886390091075586)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [ak.py](src/ak.py) | [link](https://atcoder.jp/contests/typical90/submissions/23947600) | AC | 1,369 ms |
+| PyPy3 (7.3.0) | [ak.py](src/ak.py) | [link](https://atcoder.jp/contests/typical90/submissions/23947638) | AC | 114 ms |
+
+
+### Memo
+- 最初スライド最小値解法を実装したが Python で通る気がしなかったので別解を実装した（スライド最小値は PyPy で 550 ms ほどであった）。
+- まず、作る料理の集合を決めたとき、その中で L でも R でもない中途半端な量の香辛料を使う料理は高々一つ、としてもちょうど W g にできるかどうかに変化はない
+  - 全て L 側に寄せた上で、余った分を貪欲に埋めていけば中途半端なものは高々一つになる
+- また、高々一つである中途半端な量の香辛料を使う料理について、それを、作る料理の集合のうち R - L が最大であるもの、としても問題ない
+  - R - L でソートした上で貪欲に余った香辛料を埋めていき、どこか途中で中途半端になった場合はその中途半端な香辛料を末尾の料理に丸々移すことで実現できる
+- よって、R - L でソートした上で、L のみ、R のみの遷移で DP をしていき、各料理に対して「現時点の DP テーブル + この料理に香辛料を中途半端に使う、を行ってちょうど W g になるときの価値の最大値」を毎回計算すると、それらの最大値が答えとなる。
