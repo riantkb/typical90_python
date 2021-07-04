@@ -756,3 +756,18 @@
 ### Memo
 - 特になし
 - Python の場合はオーバーフローなど何も気にせずに lcm を求めても問題ない。
+
+
+
+## AM: 039 - Tree Distance（★5）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_am)
+- [Tweet Link](https://twitter.com/e869120/status/1392612322410057729)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [am.py](src/am.py) | [link](https://atcoder.jp/contests/typical90/submissions/23994024) | AC | 220 ms |
+
+
+### Memo
+- 特になし
