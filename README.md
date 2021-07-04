@@ -670,3 +670,25 @@
 
 ### Memo
 - 特になし
+
+
+
+## AI: 035 - Preserve Connectivity（★7）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ai)
+- [Tweet Link](https://twitter.com/e869120/status/1390798852299448322)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [ai.py](src/ai.py) | [link](https://atcoder.jp/contests/typical90/submissions/23943439) | TLE | > 2,000 ms | |
+| PyPy3 (7.3.0) | [ai.py](src/ai.py) | [link](https://atcoder.jp/contests/typical90/submissions/23945713) | AC | 1,325 ms | |
+| Python (3.8.2) | [ai_numba.py](src/ai_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/23945622) | AC | 349 ms | Using Numba AOT |
+
+
+### Memo
+- 普通にやると PyPy だと通るが Python だと TLE する（[ai.py](src/ai.py)）。
+- Numba で高速化して AOT すると通るが、以下の理由からかなりしんどい（[ai_numba.py](src/ai_numba.py)）。
+  - 動的配列を引数に渡せないのでグラフを隣接リストで渡せない
+    - Typed List を使えばできるはずだが、AtCoder の Numba は少しバージョンが古いので速度が少し不安？
+  - deque が使えないのと関数内再帰関数がほとんど使えないので LCA 初期化時に DFS も BFS もしづらい
+    - List の append/pop で DFS ができる
