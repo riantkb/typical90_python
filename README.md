@@ -740,3 +740,19 @@
 - また、高々一つである中途半端な量の香辛料を使う料理について、それを、作る料理の集合のうち R - L が最大であるもの、としても問題ない
   - R - L でソートした上で貪欲に余った香辛料を埋めていき、どこか途中で中途半端になった場合はその中途半端な香辛料を末尾の料理に丸々移すことで実現できる
 - よって、R - L でソートした上で、L のみ、R のみの遷移で DP をしていき、各料理に対して「現時点の DP テーブル + この料理に香辛料を中途半端に使う、を行ってちょうど W g になるときの価値の最大値」を毎回計算すると、それらの最大値が答えとなる。
+
+
+
+## AL: 038 - Large LCM（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_al)
+- [Tweet Link](https://twitter.com/e869120/status/1392248540882116610)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [al.py](src/al.py) | [link](https://atcoder.jp/contests/typical90/submissions/23993615) | AC | 27 ms |
+
+
+### Memo
+- 特になし
+- Python の場合はオーバーフローなど何も気にせずに lcm を求めても問題ない。
