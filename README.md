@@ -655,3 +655,18 @@
 
 ### Memo
 - 特になし
+
+
+
+## AH: 034 - There are few types of elements（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ah)
+- [Tweet Link](https://twitter.com/e869120/status/1390436977808351234)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [ah.py](src/ah.py) | [link](https://atcoder.jp/contests/typical90/submissions/23942068) | AC | 143 ms |
+
+
+### Memo
+- 特になし
