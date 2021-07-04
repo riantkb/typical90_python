@@ -564,7 +564,6 @@
 | Python (3.8.2) | [ac_aot.py](src/ac_aot.py) | [link](https://atcoder.jp/contests/typical90/submissions/23125429) | AC | 1,871 ms | Using Numba AOT |
 
 
-
 ### Memo
 - 遅延セグメント木は以下のプロジェクトのコードを使用させていただきました。
   - https://github.com/not522/ac-library-python
@@ -606,3 +605,21 @@
     ```
     と書くこともでき、下の方が高速になる。今回のように N が非常に大きい時は速度の差が顕著となる。
 - NumPy のスライスによる範囲加算を用いることで高速化でき、Numba も用いることで 960 ms ほどで通った（[ad_numba.py](src/ad_numba.py)）。
+
+
+
+## AE: 031 - VS AtCoder（★6）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ae)
+- [Tweet Link](https://twitter.com/e869120/status/1389349360866009090)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| PyPy3 (7.3.0) | [ae.py](src/ae.py) | [link](https://atcoder.jp/contests/typical90/submissions/23941220) | AC | 671 ms | |
+| Python (3.8.2) | [ae_numba.py](src/ae_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/23940893) | AC | 622 ms | Using Numba |
+
+
+### Memo
+- 普通に grundy 数のテーブルを埋めていくと PyPy では通るが Python だと TLE する（手元で 5 sec ほど）（[ae.py](src/ae.py)）。
+- Numba で高速化すると通るようになる（[ae_numba.py](src/ae_numba.py)）。
+  - AOT にすると 200 ms ほどになった。
