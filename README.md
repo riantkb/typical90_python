@@ -792,3 +792,20 @@
 - Dinic 法は計算量が `O(V^2 E)` である上に、実用上はかなり速いため、かなり高速に通る。
   - Dinic 法の実装は以下のプロジェクトのコードを使用させていただきました。
     - https://github.com/not522/ac-library-python
+
+
+
+## AO: 041 - Piles in AtCoder Farm（★7）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ao)
+- [Tweet Link](https://twitter.com/e869120/status/1393336369540341760)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [ao.py](src/ao.py) | [link](https://atcoder.jp/contests/typical90/submissions/24014484) | AC | 520 ms |
+
+
+### Memo
+- 特になし
+- SciPy にも凸包を計算する関数が存在したが、実数を受け取る形式になっていたので今回の問題に適用可能かは不明（未検証）。
+  - https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.ConvexHull.html
