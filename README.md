@@ -809,3 +809,19 @@
 - 特になし
 - SciPy にも凸包を計算する関数が存在したが、実数を受け取る形式になっていたので今回の問題に適用可能かは不明（未検証）。
   - https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.ConvexHull.html
+
+
+
+## AP: 042 - Multiple of 9（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ap)
+- [Tweet Link](https://twitter.com/e869120/status/1394062245181595653)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [ap.py](src/ap.py) | [link](https://atcoder.jp/contests/typical90/submissions/24015063) | AC | 59 ms |
+
+
+### Memo
+- 特になし
+- Python は配列外参照は IndexError を返すが、スライスの場合は共通部分だけ返すため、配列の長さより大きい値を入れてもエラーにはならない。
