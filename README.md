@@ -771,3 +771,24 @@
 
 ### Memo
 - 特になし
+
+
+
+## AN: 040 - Get More Money（★7）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_an)
+- [Tweet Link](https://twitter.com/e869120/status/1392974101061378049)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
+| :--- | :---: | :---: | :---: | ---: | :---: |
+| Python (3.8.2) | [an_scipy.py](src/an_scipy.py) | [link](https://atcoder.jp/contests/typical90/submissions/23995356) | AC | 549 ms | Using SciPy |
+| Python (3.8.2) | [an_dinic.py](src/an_dinic.py) | [link](https://atcoder.jp/contests/typical90/submissions/23995467) | AC | 49 ms | |
+
+
+### Memo
+- SciPy に maximum_flow を求める関数が存在するため、それを貼ると通せる。
+  - Edmonds–Karp 法で実装されているため、計算量は `O(V E^2)`。今回の問題だと辺の数が最大で 5000 程度になるため少し遅い。
+    - https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.maximum_flow.html
+- Dinic 法は計算量が `O(V^2 E)` である上に、実用上はかなり速いため、かなり高速に通る。
+  - Dinic 法の実装は以下のプロジェクトのコードを使用させていただきました。
+    - https://github.com/not522/ac-library-python
