@@ -4,15 +4,17 @@ import numpy as np
 
 def main():
     h, w = map(int, input().split())
-    s = np.array([[c == '.' for c in input()] for _ in range(h)])
-    print(solve(h, w, s))
+    s = np.array([[c == '.' for c in input()]
+                  for _ in range(h)], dtype=np.bool8)
+    print(solve(s))
 
 
 if __name__ == "__main__":
     if sys.argv[-1] == 'ONLINE_JUDGE':
         from numba.pycc import CC
 
-        def solve(h, w, s):
+        def solve(s):
+            h, w = s.shape
             mod = 10 ** 9 + 7
             mask = (1 << (w + 1)) - 1
 
@@ -27,9 +29,10 @@ if __name__ == "__main__":
                 lis = [0]
                 for j in range(w + 1):
                     nex = []
+                    t = (i + j - 1) % w
                     for k in lis:
                         nex.append(k << 1)
-                        if not collision((i + j - 1) % w, k):
+                        if not collision(t, k):
                             nex.append(k << 1 | 1)
                     lis = nex
                 states.append(lis)
@@ -68,7 +71,7 @@ if __name__ == "__main__":
             return res % mod
 
         cc = CC('my_module')
-        cc.export('solve', 'int64(int32, int32, boolean[:, :])')(solve)
+        cc.export('solve', 'int64(boolean[:, :])')(solve)
         cc.compile()
 
     else:

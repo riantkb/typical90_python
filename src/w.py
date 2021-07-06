@@ -16,16 +16,17 @@ def main():
         lis = [0]
         for j in range(w + 1):
             nex = []
+            t = (i + j - 1) % w
             for k in lis:
                 nex.append(k << 1)
-                if not collision((i + j - 1) % w, k):
+                if not collision(t, k):
                     nex.append(k << 1 | 1)
             lis = nex
         states[i] = lis
 
     indices = [{b: i for i, b in enumerate(st)} for st in states]
-    nexts = [[[indices[(i + 1) % w][st << 1 & mask],
-               indices[(i + 1) % w][(st << 1 | 1) & mask]
+    nexts = [[[indices[i + 1 - w][st << 1 & mask],
+               indices[i + 1 - w][(st << 1 | 1) & mask]
                if not collision(i, st) else -1]
               for st in states[i]] for i in range(w)]
 
@@ -34,7 +35,7 @@ def main():
 
     for i in range(h):
         for j in range(w):
-            nex = [0 for _ in states[(j + 1) % w]]
+            nex = [0 for _ in states[j + 1 - w]]
             for k, c in enumerate(dp):
                 nk = nexts[j][k][0]
                 nex[nk] += c

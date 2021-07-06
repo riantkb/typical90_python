@@ -454,8 +454,8 @@
 
 | Submission Language | Source Code | Submission | Verdict | Exec Time | Description |
 | :--- | :---: | :---: | :---: | ---: | :---: |
-| PyPy3 (7.3.0) | [w.py](src/w.py) | [link](https://atcoder.jp/contests/typical90/submissions/22756124) | AC | 6,068 ms | |
-| Python (3.8.2) | [w_numba.py](src/w_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/22756564) | AC | 7,716 ms | Using Numba AOT |
+| PyPy3 (7.3.0) | [w.py](src/w.py) | [link](https://atcoder.jp/contests/typical90/submissions/24034155) | AC | 5,754 ms | |
+| Python (3.8.2) | [w_numba.py](src/w_numba.py) | [link](https://atcoder.jp/contests/typical90/submissions/24034186) | AC | 7,611 ms | Using Numba AOT |
 
 
 ### Memo
