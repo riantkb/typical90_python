@@ -825,3 +825,24 @@
 ### Memo
 - 特になし
 - Python は配列外参照は IndexError を返すが、スライスの場合は共通部分だけ返すため、配列の長さより大きい値を入れてもエラーにはならない。
+
+
+
+## AQ: 043 - Maze Challenge with Lack of Sleep（★4）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_aq)
+- [Tweet Link](https://twitter.com/e869120/status/1394423616805097477)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [aq.py](src/aq.py) | [link](https://atcoder.jp/contests/typical90/submissions/24021119) | AC | 1,532 ms |
+| Python (3.8.2) | [aq_2.py](src/aq_2.py) | [link](https://atcoder.jp/contests/typical90/submissions/24021206) | AC | 932 ms |
+
+
+### Memo
+- 普通に位置と向きを持って 01-BFS を行うと Python だと TLE する（最大ケースが手元で 6 sec ほど）。
+- 以下をはじめとするいくつかの定数倍高速化を行うことで Python でも（Numba 等を使わずに）通るようになった（[aq.py](src/aq.py)）。
+  - 各マスについてそれまでに曲がった回数を、最後の移動が上下左右のどれか、という 4 通りではなく最後の移動が縦か横か、という 2 通りで持つ
+  - コスト 0 の遷移を deque に入れるのではなく for ループで実現する
+- 別の方針にすることでもう少しだけ高速になった（[aq_2.py](src/aq_2.py)）。
+  - コスト 0 で移動できる状態を一つの頂点としたグラフを構築し、そのグラフ上で BFS で最短経路を求める
