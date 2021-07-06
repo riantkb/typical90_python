@@ -846,3 +846,18 @@
   - コスト 0 の遷移を deque に入れるのではなく for ループで実現する
 - 別の方針にすることでもう少しだけ高速になった（[aq_2.py](src/aq_2.py)）。
   - コスト 0 で移動できる状態を一つの頂点としたグラフを構築し、そのグラフ上で BFS で最短経路を求める
+
+
+
+## AR: 044 - Shift and Swapping（★3）
+
+- [Problem Link](https://atcoder.jp/contests/typical90/tasks/typical90_ar)
+- [Tweet Link](https://twitter.com/e869120/status/1394787605099601923)
+
+| Submission Language | Source Code | Submission | Verdict | Exec Time |
+| :--- | :---: | :---: | :---: | ---: |
+| Python (3.8.2) | [ar.py](src/ar.py) | [link](https://atcoder.jp/contests/typical90/submissions/24033823) | AC | 304 ms |
+
+
+### Memo
+- Python は配列 `A` に対し `A[-1]` などのように負のインデックスにアクセスすることができるため、うまく使うと条件分岐や mod を省略することができることもある。
